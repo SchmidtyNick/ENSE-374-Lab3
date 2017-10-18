@@ -12,7 +12,8 @@ public class LinkedListTest {
 				testList.addElement(3);
 				System.out.println(testList.getElement(1));
 				testList.deleteListElement(2);
-				testList.printLinkedList();
+				testList.forwardPrint();
+				testList.backwardPrint();
 	}
 
 }

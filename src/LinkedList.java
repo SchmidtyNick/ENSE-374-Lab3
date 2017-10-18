@@ -2,6 +2,7 @@
 public class LinkedList 
 {
 	private ListElement head;
+	private ListElement tail;
 	public static int counter;
 	//Empty Constructor
 	public LinkedList() 
@@ -85,8 +86,9 @@ public class LinkedList
 		return false;
 	}
 	
-	public void printLinkedList()
+	public void forwardPrint()
 	{
+		   System.out.print("List (head-->tail): ");
 		ListElement temp = head;
 		while (temp != null)
 		{
@@ -95,5 +97,16 @@ public class LinkedList
 		}
 	}
 	
+	public void backwardPrint()
+    {
+    System.out.print("List (tail-->head): ");
+    ListElement temp = tail;           // start at end
+    while(temp != null)         // until start of list,
+       {
+      System.out.println(temp.getData());      // display data
+       temp = temp.getPrev(); // move to previous link
+       }
+    System.out.println("");
+    }
 
 }
