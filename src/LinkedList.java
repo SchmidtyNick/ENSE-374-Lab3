@@ -14,6 +14,7 @@ public class LinkedList
 	{
 		return (head == null);
 	}
+	
 	//Add element function
 	public void addElement(int  data)//add elements in the list
 	{
@@ -55,30 +56,28 @@ public class LinkedList
 	
 	//Delete ListElement function
 	//Made this function boolean to check if the index is is in realm of the counter
-	public boolean deleteListElement(int index) {
-		 
+	public boolean deleteListElement(int index) 
+	{
+		 int i =0;
 		// if the index is out of range, exit
 		if (index < 1 || index > counter)
 			return false;
- 
-		ListElement Current = head;
-		if (head != null) {
-			for (int i = 0; i < index; i++) {
-				if (Current.getNext() == null)
-					return false;
- 
-				Current = Current.getNext();
+		
+		//Starts at head and iterates through list
+		for (ListElement current = head.getNext(); current != head; current= current.getNext())
+		{
+			if (i == index)
+			{
+				ListElement prev = current.getPrev();
+				ListElement next =current.getNext();
+				prev.setNext(next);
+				next.setPrev(prev);
 			}
-			Current.setNext(Current.getNext().getNext());
- 
-			// decrement the number of elements variable
-			counter--;
-			return true;
- 
+			i ++;
 		}
-		return false;
+		return true;
 	}
-	
+
 	public void forwardPrint()
 	{
 		   System.out.print("List (head-->tail): ");
