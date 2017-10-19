@@ -16,21 +16,38 @@ public class LinkedList
 	}
 	
 	//Add element function
-	public void addElement(int  data)//add elements in the list
-	{
-	    ListElement newElement = new ListElement(data);
-	    if (isEmpty()) {
-	        head = newElement;
-	        tail = newElement;
+	  public void addElement(int data) 
+	  {
+	      ListElement Temp = new ListElement(data);
+	      Temp.setNext(null);
+	      
+	      //Checks to see if its the first element
+	      if (counter == 0) 
+	      {
+	          Temp.setPrev(null);
+	          head = Temp;
+	          tail = Temp;
+	      }
+	      //Checks to see if there is only 1 element. head and tail are same node
+	      else if (counter == 1) 
+	      {
+	          head.setNext(Temp);
+	          tail = Temp;
+	          tail.setPrev(head);
+	       }
+	      
+	      //Else its inserted into the end of the list
+	      else
+	      {
+	        Temp.setPrev(tail);
+	        tail.setNext(Temp);
+	        tail = Temp;
+	      }
+	      
+	      //Added a print statement for testing purposes
+	      System.out.println("Inserted " + data + " into the linked list");
+	     counter++;
 	    }
-	    else {
-	        newElement.setPrev(tail);
-	        tail.setNext(newElement);
-	        tail = newElement;
-	    }
-	    counter++;
-	}
-
 	
 	// returns the element at the specified position in this list.
 	public Object getElement(int index)
@@ -54,38 +71,40 @@ public class LinkedList
  
 	}
 	
-	//Delete ListElement function
-	//Made this function boolean to check if the index is is in realm of the counter
-	public boolean deleteListElement(int index) 
-	{
-		 int i =0;
-		// if the index is out of range, exit
-		if (index < 1 || index > counter)
-			return false;
-		
-		//Starts at head and iterates through list
-		for (ListElement current = head.getNext(); current != head; current= current.getNext())
-		{
-			if (i == index)
-			{
-				ListElement prev = current.getPrev();
-				ListElement next =current.getNext();
-				prev.setNext(next);
-				next.setPrev(prev);
-			}
-			i ++;
-		}
-		return true;
-	}
+	 public void deleteListElement(int index) 
+	  {
+	     if (index == 0) {
+	           ListElement q = head;
+	           head = q.getNext();
+	           counter--;
+	      }
+	     
+	     else
+	      {
+	        ListElement currNode = head;
+	        for (int i = 0; i < index; i++) {
+	            //Node p = currNode;
+	         //   System.out.println("At this payload " + currNode.getPayload());
+	            currNode = currNode.getNext();
+	          //  System.out.println("Now at this payload " + currNode.getPayload());
+	        }
+	        ListElement temp = currNode;
+	       // System.out.println("Removing the node with payload " + temp.getPayload()); 
+	        currNode = temp.getPrev();
+	        currNode.setNext(temp.getNext());
+	        temp = null;
+	        counter--;
+	    }
 
+	  }
 	public void forwardPrint()
 	{
-		   System.out.print("List (head-->tail): ");
+		  System.out.print("List (head-->tail): "); //Start at head
 		ListElement temp = head;
-		while (temp != null)
+		while (temp != null) //Until end of list
 		{
-			System.out.println(temp.getData());
-			temp = temp.getNext();
+			System.out.println(temp.getData()); //Display Data	
+			temp = temp.getNext(); //Move to next link
 		}
 	}
 	
@@ -93,10 +112,10 @@ public class LinkedList
     {
     System.out.print("List (tail-->head): ");
     ListElement temp = tail;           // start at end
-    while(temp != null)         // until start of list,
+    while(temp != null)         // Until start of list,
        {
-      System.out.println(temp.getData());      // display data
-       temp = temp.getPrev(); // move to previous link
+      System.out.println(temp.getData());      // Display data
+       temp = temp.getPrev(); // Move to previous Link
        }
     System.out.println("");
     }
