@@ -9,34 +9,27 @@ public class LinkedList
 	{
 		 
 	}
-	//Add element function
-	public void addElement(int data)
+	//Checks to see if the list is empty. This is a helper function for addElement
+	public boolean isEmpty()
 	{
-		 
-		// If list is empty
-		if (head == null) {
-			head = new ListElement(data);
-		}
- 
-		ListElement Temp = new ListElement(data);
-		ListElement Current = head;
- 
-		// Let's check for NPE before iterate over crunchifyCurrent
-		if (Current != null) {
- 
-			// starting at the head node, move through the list and add at the last node
-			while (Current.getNext() != null) 
-			{
-				Current = Current.getNext();
-			}
- 
-
-			Current.setNext(Temp);
-		}
- 
-		// Increase counter
-		counter++;
+		return (head == null);
 	}
+	//Add element function
+	public void addElement(int  data)//add elements in the list
+	{
+	    ListElement newElement = new ListElement(data);
+	    if (isEmpty()) {
+	        head = newElement;
+	        tail = newElement;
+	    }
+	    else {
+	        newElement.setPrev(tail);
+	        tail.setNext(newElement);
+	        tail = newElement;
+	    }
+	    counter++;
+	}
+
 	
 	// returns the element at the specified position in this list.
 	public Object getElement(int index)
